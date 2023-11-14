@@ -29,4 +29,27 @@ Route::controller(NewsController::class)->prefix('admin')->group(function() {
 // });
 // ↑↑↑書き換えられるように↓↓↓
 // // ルーティング設定、その３
-// Route::get('/admin/news/create', [(NewsController::class, 'add']);
+// Route::get('/admin/news/create', [NewsController::class, 'add']);
+
+// // 課題３－３）
+// // 「http://XXXXXX.jp/XXX というアクセスが来たときに、
+// // AAAControllerのbbbというAction に渡すRoutingの設定」を書いてみてください
+// use App\Http\Controllers\AAAController;
+// //                       ^^^^^^^^^^^^^
+// //  ^^^^^^^^^^^^^^^^^^^^^ コントローラが保存されているフォルダとして固定となる
+// // use 宣言を使って、使用する AAAController コントローラを指定する
+// Route::get('/XXX', [AAAController::class, 'bbb']);
+// //                                         ^^^^ bbb というアクション
+// //                  ^^^^^^^^^^^^^^^^^^^^ AAAController コントローラ
+// //         ^^^^^^ /XXX というアクセスが来たとき
+
+// 課題３－４）
+// 【応用】 前章でAdmin/ProfileControllerを作成し、add Action, edit Actionを追加しました。
+// web.phpを編集して、admin/profile/create にアクセスしたら ProfileController の add Action に、
+// admin/profile/edit にアクセスしたら ProfileController の edit Action に割り当てるように設定してください
+
+use App\Http\Controllers\Admin\ProfileController;
+Route::controller(ProfileController::class)->prefix('admin')->group(function() {
+    Route::get('profile/create', 'add');
+    Route::get('profile/edit', 'edit');
+});
