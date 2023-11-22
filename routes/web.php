@@ -20,7 +20,7 @@ Route::get('/', function () {
 use App\Http\Controllers\Admin\NewsController;
 // ルーティング設定、その１
 Route::controller(NewsController::class)->prefix('admin')->group(function() {
-    Route::get('news/create', 'add');
+    Route::get('profile/create', 'add')->middleware('auth');
 });
 // ↑↑↑書き換えられるように↓↓↓
 // // ルーティング設定、その２
@@ -50,9 +50,9 @@ Route::controller(NewsController::class)->prefix('admin')->group(function() {
 
 use App\Http\Controllers\Admin\ProfileController;
 Route::controller(ProfileController::class)->prefix('admin')->group(function() {
-    Route::get('profile/create', 'add');
-    Route::get('profile/edit', 'edit');
-});
+    Route::get('profile/create', 'add')->middleware('auth');
+    Route::get('profile/edit', 'edit')->middleware('auth');
+    });
 
 Auth::routes();
 
