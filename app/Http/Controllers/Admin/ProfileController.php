@@ -8,26 +8,11 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
     
-        public function add()
-        {
+    public function add()
+    {
         return view('admin.profile.create');
-        }
-        public function create()
-    {
-        return redirect('admin/profile/create');
     }
-
-    public function edit()
-    {
-        return view('admin.profile.edit');
-    }
-
-    public function update()
-    {
-        return redirect('admin/profile/edit');
-    }
-        
-        public function create(Request $request)
+    public function create(Request $request)
     {
         // 以下を追記
         // Validationを行う
@@ -56,4 +41,14 @@ class ProfileController extends Controller
         return redirect('admin/profile/create');
     }
     
+
+    public function edit()
+    {
+        return view('admin.profile.edit');
+    }
+    public function update()
+    {
+        return redirect('admin/profile/edit');
+    }
+        
 }
