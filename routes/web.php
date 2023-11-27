@@ -19,17 +19,18 @@ Route::get('/', function () {
 
 use App\Http\Controllers\Admin\NewsController;
 // ルーティング設定、その１
-Route::controller(NewsController::class)->prefix('admin')->group(function() {
-    Route::get('profile/create', 'add')->middleware('auth');
+Route::controller(NewsController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('news/create', 'add')->name('news.add');
+    Route::post('news/create', 'create')->name('news.create');
 });
 // ↑↑↑書き換えられるように↓↓↓
 // // ルーティング設定、その２
-// Route::controller(NewsController::class)->group(function() {
-//     Route::get('admin/news/create', 'add');
+ //Route::controller(NewsController::class)->group(function() {
+     //Route::get('admin/news/create', 'add');
 // });
 // ↑↑↑書き換えられるように↓↓↓
 // // ルーティング設定、その３
-// Route::get('/admin/news/create', [NewsController::class, 'add']);
+ //Route::get('/admin/news/create', [NewsController::class, 'add']);
 
 // // 課題３－３）
 // // 「http://XXXXXX.jp/XXX というアクセスが来たときに、
@@ -49,9 +50,9 @@ Route::controller(NewsController::class)->prefix('admin')->group(function() {
 // admin/profile/edit にアクセスしたら ProfileController の edit Action に割り当てるように設定してください
 
 use App\Http\Controllers\Admin\ProfileController;
-Route::controller(ProfileController::class)->prefix('admin')->group(function() {
-    Route::get('profile/create', 'add')->middleware('auth');
-    Route::get('profile/edit', 'edit')->middleware('auth');
+Route::controller(profileController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('profile/create', 'add')->name('profile.add');
+    Route::post('profile/edit', 'edit')->name('profile.create');
     });
 
 Auth::routes();

@@ -80,7 +80,7 @@
 
             <main class="py-4">
                 {{-- コンテンツをここに入れるため、@yieldで空けておきます。 --}}
-                ニュース新規作成
+                @yield('content')
             </main>
         </div>
     </body>
