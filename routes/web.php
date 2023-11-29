@@ -50,10 +50,10 @@ Route::controller(NewsController::class)->prefix('admin')->name('admin.')->middl
 // admin/profile/edit にアクセスしたら ProfileController の edit Action に割り当てるように設定してください
 
 use App\Http\Controllers\Admin\ProfileController;
-Route::controller(profileController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+Route::controller(ProfileController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('profile/create', 'add')->name('profile.add');
-    Route::post('profile/edit', 'edit')->name('profile.create');
-    });
+    Route::post('profile/create', 'create')->name('profile.create');
+});
 
 Auth::routes();
 
