@@ -23,6 +23,9 @@ Route::controller(NewsController::class)->prefix('admin')->name('admin.')->middl
     Route::get('news/create', 'add')->name('news.add');
     Route::post('news/create', 'create')->name('news.create');
     Route::get('news', 'index')->name('news.index');
+    Route::get('news/edit', 'edit')->name('news.edit');
+    Route::post('news/edit', 'update')->name('news.update');
+    Route::get('news/delete', 'delete')->name('news.delete');
 });
 // ↑↑↑書き換えられるように↓↓↓
 // // ルーティング設定、その２
@@ -59,3 +62,6 @@ Route::controller(ProfileController::class)->prefix('admin')->name('admin.')->mi
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+use App\Http\Controllers\NewsController as PublicNewsController;
+Route::get('/', [PublicNewsController::class, 'index'])->name('news.index');
