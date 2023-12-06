@@ -1,86 +1,54 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.admin')
+@section('title', 'ニュースの編集')
 
- <!-- CSRF Token -->
-         {{-- 後の章で説明します --}}
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        {{-- 各ページごとにtitleタグを入れるために@yieldで空けておきます。 --}}
-        <title>Mynews</title>
-
-        <!-- Scripts -->
-         {{-- Laravel標準で用意されているJavascriptを読み込みます --}}
-        <script src="{{ secure_asset('js/app.js') }}" defer></script>
-
-        <!-- Fonts -->
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        {{-- Laravel標準で用意されているCSSを読み込みます --}}
-        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-        {{-- この章の後半で作成するCSSを読み込みます --}}
-        <link href="{{ secure_asset('css/admin.css') }}" rel="stylesheet">
-    </head>
-    <body>
-        <div id="app">
-            {{-- 画面上部に表示するナビゲーションバーです。 --}}
-            <nav class="navbar navbar-expand-md navbar-dark navbar-laravel">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav ms-auto">
-
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2>ニュース編集</h2>
+                <form action="{{ route('admin.news.update') }}" method="post" enctype="multipart/form-data">
+                    @if (count($errors) > 0)
+                        <ul>
+                            @foreach($errors->all() as $e)
+                                <li>{{ $e }}</li>
+                            @endforeach
                         </ul>
-
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav">
-                            
-                            <!-- Authentication Links -->
-                        {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('messages.login') }}</a></li>
-                        {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
-                        @else
-                            <li class="nav-item dropdown">
-                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                 </a>
-
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('messages.logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            @endguest
-                            {{-- 以上までを追記 --}}
-                                
-                            </main>
+                    @endif
+                    <div class="form-group row">
+                        <label class="col-md-2" for="title">タイトル</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="title" value="{{ $news_form->title }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2" for="body">本文</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="body" rows="20">{{ $news_form->body }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2" for="image">画像</label>
+                        <div class="col-md-10">
+                            <input type="file" class="form-control-file" name="image">
+                            <div class="form-text text-info">
+                                設定中: {{ $news_form->image_path }}
                             </div>
-                            </nav>
-        
-                 <main class="py-4">
-                {{-- コンテンツをここに入れるため、@yieldで空けておきます。 --}}
-                ニュース新規作成
-            </main>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="remove" value="true">画像を削除
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <input type="hidden" name="id" value="{{ $news_form->id }}">
+                            @csrf
+                            <input type="submit" class="btn btn-primary" value="更新">
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-    </body>
-</html>
+    </div>
+@endsection
