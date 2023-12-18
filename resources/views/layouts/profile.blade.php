@@ -1,3 +1,9 @@
+{{--
+課題６－３）
+【応用】 resources/views/layouts/admin.blade.php をコピーして
+profile.blade.php を同じディレクトリ（resources/views/layouts）に作成しましょう。
+また、以下の部分を下の※1のように修正しましょう
+--}}
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -10,7 +16,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         {{-- 各ページごとにtitleタグを入れるために@yieldで空けておきます。 --}}
-        <title>Mynews</title>
+        <title>@yield('title')</title>
 
         <!-- Scripts -->
          {{-- Laravel標準で用意されているJavascriptを読み込みます --}}
@@ -24,7 +30,7 @@
         {{-- Laravel標準で用意されているCSSを読み込みます --}}
         <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
         {{-- この章の後半で作成するCSSを読み込みます --}}
-        <link href="{{ secure_asset('css/admin.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('css/profile.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
@@ -80,7 +86,7 @@
 
             <main class="py-4">
                 {{-- コンテンツをここに入れるため、@yieldで空けておきます。 --}}
-                ニュース新規作成
+                @yield('content')
             </main>
         </div>
     </body>

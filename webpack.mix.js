@@ -11,6 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
+/*
+課題６－６）
+【応用】 webpack.mix.jsを編集して、profile.scss をコンパイルするように編集してみましょう
+*/
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')

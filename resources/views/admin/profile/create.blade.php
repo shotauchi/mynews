@@ -1,6 +1,15 @@
-@extends('layouts.admin')
-@section('title', 'ニュースの新規作成')
+{{-- 
+課題６－４）
+【応用】 プロフィール作成画面用に、resources/views/admin/profile/create.blade.php
+ファイルを作成し、3. で作成した profile.blade.phpファイルを読み込み、
+また プロフィールのページであることがわかるように titleとcontentを編集しましょう
+（ヒント: resources/views/admin/news/create.blade.php を参考にします）
+--}}
+@extends('layouts.profile'){{-- 3. で作成した profile.blade.phpファイルを読み込み --}}
 
+{{-- プロフィールのページであることがわかるように titleとう --}}
+@section('title', 'プロフィールの新規作成')
+{{-- contentを編集しましょ --}}
 @section('content')
     <div class="container">
         <div class="row">
