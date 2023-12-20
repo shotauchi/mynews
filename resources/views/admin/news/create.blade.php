@@ -8,6 +8,11 @@
                 <h2>ニュース新規作成</h2>
                 <form action="{{ route('admin.news.create') }}" method="post" enctype="multipart/form-data">
 
+                    {{--
+                    課題９－６）
+                    【応用】 resources/views/admin/profile/create.blade.php を開いて、
+                    Validationでエラーが発生した場合にエラーが表示されるようになっているか確認してみましょう
+                    --}}
                     @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
