@@ -20,10 +20,9 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             // 名前(name)
-            $table->string('name');// プロフィール情報の名前を保存するカラム
-            $table->string('gender');// 性別(gender)
-            $table->string('hobby');// 趣味(hobby)
-            $table->string('introduction');// 自己紹介(introduction)
+            $table->string('title');// プロフィール情報の名前を保存するカラム
+            $table->string('body');// 性別(gender)
+            $table->string('image_path');// 趣味(hobby)
             $table->timestamps();
         });
     }

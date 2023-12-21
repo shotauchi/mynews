@@ -48,21 +48,21 @@ class ProfileController extends Controller
         $profile->fill($form);
         
 
-        return redirect('admin/profile');
+        return redirect('admin/profile/create');
     }
 
     // 以下を追記
     public function index(Request $request)
     {
-        $cond_name = $request->cond_name;
-        if ($cond_name != '') {
+        $cond_title = $request->cond_title;
+        if ($cond_title != '') {
             // 検索されたら検索結果を取得する
-            $posts = Profile::where('name', $cond_name)->get();
+            $posts = Profile::where('title', $cond_title)->get();
         } else {
             // それ以外はすべてのニュースを取得する
             $posts = Profile::all();
         }
-        return view('admin.profile.index', ['posts' => $posts, 'cond_name' => $cond_name]);
+        return view('admin.profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
     // 以下を追記
 
@@ -73,8 +73,7 @@ class ProfileController extends Controller
         if (empty($profile)) {
             abort(404);
         }
-        return view('admin.profile.edit', ['news_form' => $profile
-        ]);
+        return view('admin.profile.edit', ['Profile_form' => $profile]);
     }
 
     public function update(Request $request)
@@ -101,7 +100,12 @@ class ProfileController extends Controller
 
         // 該当するデータを上書きして保存する
         $profile->fill($profile_form)->save();
-
+// 以下を追記
+        $history = new History();
+        $history->profile_id = $profile->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
+        
         return redirect('admin/profile');
     }
     // 以下を追記
