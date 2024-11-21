@@ -17,6 +17,9 @@ return new class extends Migration
         // 【応用】 create_profiles_table というMigrationのひな形ファイルを作成し、
         // profilesというテーブル名で名前(name)、性別(gender)、趣味(hobby)、自己紹介(introduction)
         // を保存できるように修正して、 migrateしてテーブルを作成しましょう
+        // 修正してはいけないファイル
+        // 修正するのであれば、データベーステーブル操作（ロールバックなど）を実施する必要がある
+        // →元に戻す必要がある
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             // 名前(name)

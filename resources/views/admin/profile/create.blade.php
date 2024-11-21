@@ -30,6 +30,10 @@
                         </ul>
                     @endif
                     <div class="form-group row">
+                        {{--
+                            タイトル、本文、画像は使わない
+                            名前、性別、趣味、自己紹介を使っていく
+                        --}}
                         <label class="col-md-2">タイトル</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="title" value="{{ old('title') }}">
